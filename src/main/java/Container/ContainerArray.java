@@ -1,6 +1,10 @@
 package Container;
 
-public class ContainerArray<T> {
+import Telecommunication.AbstractContract;
+
+import java.util.UUID;
+
+public class ContainerArray<T extends AbstractContract> {
     private final int INIT_SIZE = 16;
     private final int CUT_RATE = 4;
     private Object[] array = new Object[INIT_SIZE];
@@ -8,12 +12,12 @@ public class ContainerArray<T> {
 
 
     public void add(T item) {
-        if(pointer == array.length-1)
-            resize(array.length*2);
+        if (pointer == array.length - 1)
+            resize(array.length * 2);
         array[pointer++] = item;
     }
 
-    public T get(int index) {
+    public T getIndex(int index) {
         return (T) array[index];
     }
 
@@ -24,7 +28,7 @@ public class ContainerArray<T> {
         array[pointer] = null;
         pointer--;
         if (array.length > INIT_SIZE && pointer < array.length / CUT_RATE)
-            resize(array.length/2);
+            resize(array.length / 2);
     }
 
     public int size() {
@@ -36,5 +40,14 @@ public class ContainerArray<T> {
         Object[] newArray = new Object[newLength];
         System.arraycopy(array, 0, newArray, 0, pointer);
         array = newArray;
+    }
+
+    public T get(UUID id) {
+        for (AbstractContract contract : (AbstractContract[]) array) {
+            if (contract.getID() == id) {
+                return (T) contract;
+            }
+        }
+        return null;
     }
 }

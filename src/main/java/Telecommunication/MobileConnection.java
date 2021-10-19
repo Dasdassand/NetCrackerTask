@@ -6,61 +6,19 @@ import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 
-public abstract class MobileConnection {
-    /**
-     * Все типы контрактов имеют поля
-     * <p>
-     * ID
-     * Дата начала контракта
-     * Дата окончания контракта
-     * Номер контракта
-     * Владелец контракта(Сущность Человек)
-     * <p>
-     * Кроме того
-     * <p>
-     * Контракт на мобильную связь имеет свойства(количество минут, смс и Гб трафика)
-     * Контракт на проводной интернет - скорость соединения
-     * Контракт на цифровое телевидение - пакет каналов
-     */
-    private final UUID ID;
-    private final LocalDate StartOfTheContract;
-    private final LocalDate TheEndOfTheContract;
-    private final int ContractNumber;
-    private final Person Owner;
+public abstract class MobileConnection extends AbstractContract{
+
+
     private final int NumberOfMinutes;
     private final int NumberOfSMS;
     private final int NumberOfGBOfTraffic;
 
-    public MobileConnection(LocalDate startOfTheContract, LocalDate theEndOfTheContract, int contractNumber,
-                            Person owner, int numberOfMinutes, int numberOfSMS, int numberOfGBOfTraffic) {
-        this.ID = UUID.randomUUID();
-        StartOfTheContract = startOfTheContract;
-        TheEndOfTheContract = theEndOfTheContract;
-        ContractNumber = contractNumber;
-        Owner = owner;
+    public MobileConnection(LocalDate startOfTheContract, LocalDate theEndOfTheContract, int contractNumber, Person owner,
+                            int numberOfMinutes, int numberOfSMS, int numberOfGBOfTraffic) {
+        super(startOfTheContract, theEndOfTheContract, contractNumber, owner);
         NumberOfMinutes = numberOfMinutes;
         NumberOfSMS = numberOfSMS;
         NumberOfGBOfTraffic = numberOfGBOfTraffic;
-    }
-
-    public UUID getID() {
-        return ID;
-    }
-
-    public LocalDate getStartOfTheContract() {
-        return StartOfTheContract;
-    }
-
-    public LocalDate getTheEndOfTheContract() {
-        return TheEndOfTheContract;
-    }
-
-    public int getContractNumber() {
-        return ContractNumber;
-    }
-
-    public Person getOwner() {
-        return Owner;
     }
 
     public int getNumberOfMinutes() {
@@ -91,11 +49,11 @@ public abstract class MobileConnection {
     @Override
     public String toString() {
         return "MobileConnection{" +
-                "ID=" + ID +
-                ", StartOfTheContract=" + StartOfTheContract +
-                ", TheEndOfTheContract=" + TheEndOfTheContract +
-                ", ContractNumber=" + ContractNumber +
-                ", Owner=" + Owner +
+                "ID=" + getID() +
+                ", StartOfTheContract=" + getStartOfTheContract() +
+                ", TheEndOfTheContract=" + getTheEndOfTheContract() +
+                ", ContractNumber=" + getContractNumber() +
+                ", Owner=" + getOwner() +
                 ", NumberOfMinutes=" + NumberOfMinutes +
                 ", NumberOfSMS=" + NumberOfSMS +
                 ", NumberOfGBOfTraffic=" + NumberOfGBOfTraffic +
