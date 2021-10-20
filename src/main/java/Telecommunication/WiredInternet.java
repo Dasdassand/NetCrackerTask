@@ -4,21 +4,23 @@ import Person.Person;
 
 import java.time.LocalDate;
 import java.util.Objects;
-import java.util.UUID;
 
-public abstract class WiredInternet extends AbstractContract{
+/**
+ * @author DS
+ */
+public class WiredInternet extends AbstractContract {
 
-    private final int ConnectionSpeed;
+    private final int connectionSpeed;
 
     public WiredInternet(LocalDate startOfTheContract, LocalDate theEndOfTheContract,
                          int contractNumber, Person owner, int connectionSpeed) {
         super(startOfTheContract, theEndOfTheContract, contractNumber, owner);
-        ConnectionSpeed = connectionSpeed;
+        this.connectionSpeed = connectionSpeed;
     }
 
 
     public int getConnectionSpeed() {
-        return ConnectionSpeed;
+        return connectionSpeed;
     }
 
     @Override
@@ -42,7 +44,7 @@ public abstract class WiredInternet extends AbstractContract{
                 ", TheEndOfTheContract=" + getTheEndOfTheContract() +
                 ", ContractNumber=" + getContractNumber() +
                 ", Owner=" + getOwner() +
-                ", ConnectionSpeed=" + ConnectionSpeed +
+                ", ConnectionSpeed=" + connectionSpeed +
                 '}';
     }
 }

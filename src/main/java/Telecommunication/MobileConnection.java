@@ -4,33 +4,35 @@ import Person.Person;
 
 import java.time.LocalDate;
 import java.util.Objects;
-import java.util.UUID;
 
-public abstract class MobileConnection extends AbstractContract{
+/**
+ * @author DS
+ */
+public class MobileConnection extends AbstractContract {
 
 
-    private final int NumberOfMinutes;
-    private final int NumberOfSMS;
-    private final int NumberOfGBOfTraffic;
+    private final int numberOfMinutes;
+    private final int numberOfSMS;
+    private final int numberOfGBOfTraffic;
 
     public MobileConnection(LocalDate startOfTheContract, LocalDate theEndOfTheContract, int contractNumber, Person owner,
                             int numberOfMinutes, int numberOfSMS, int numberOfGBOfTraffic) {
         super(startOfTheContract, theEndOfTheContract, contractNumber, owner);
-        NumberOfMinutes = numberOfMinutes;
-        NumberOfSMS = numberOfSMS;
-        NumberOfGBOfTraffic = numberOfGBOfTraffic;
+        this.numberOfMinutes = numberOfMinutes;
+        this.numberOfSMS = numberOfSMS;
+        this.numberOfGBOfTraffic = numberOfGBOfTraffic;
     }
 
     public int getNumberOfMinutes() {
-        return NumberOfMinutes;
+        return numberOfMinutes;
     }
 
     public int getNumberOfSMS() {
-        return NumberOfSMS;
+        return numberOfSMS;
     }
 
     public int getNumberOfGBOfTraffic() {
-        return NumberOfGBOfTraffic;
+        return numberOfGBOfTraffic;
     }
 
     @Override
@@ -54,9 +56,9 @@ public abstract class MobileConnection extends AbstractContract{
                 ", TheEndOfTheContract=" + getTheEndOfTheContract() +
                 ", ContractNumber=" + getContractNumber() +
                 ", Owner=" + getOwner() +
-                ", NumberOfMinutes=" + NumberOfMinutes +
-                ", NumberOfSMS=" + NumberOfSMS +
-                ", NumberOfGBOfTraffic=" + NumberOfGBOfTraffic +
+                ", NumberOfMinutes=" + numberOfMinutes +
+                ", NumberOfSMS=" + numberOfSMS +
+                ", NumberOfGBOfTraffic=" + numberOfGBOfTraffic +
                 '}';
     }
 }

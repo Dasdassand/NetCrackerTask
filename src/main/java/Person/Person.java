@@ -5,74 +5,79 @@ import java.time.Period;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * @author DS
+ */
 public class Person {
-    private final UUID ID = UUID.randomUUID();
-    private final String FullName;
-    private final LocalDate DateOfBirth;
-    private final short PassportSeriesAndNumber;
+    private final UUID id = UUID.randomUUID();
+    private final String fullName;
+    private final LocalDate dateOfBirth;
+    private final short passportSeriesAndNumber;
     private final Sex sex;
-    private int Age;
 
+    /**
+     * @param fullName  Full Name
+     * @param passportSeriesAndNumber  Passport Series And Number
+     * @param sex  Sex
+     * @param dateOfBirth  Date Of Birth
+     */
     public Person(String fullName, short passportSeriesAndNumber, Sex sex, LocalDate dateOfBirth) {
-        FullName = fullName;
-        DateOfBirth = dateOfBirth;
-        PassportSeriesAndNumber = passportSeriesAndNumber;
+        this.fullName = fullName;
+        this.dateOfBirth = dateOfBirth;
+        this.passportSeriesAndNumber = passportSeriesAndNumber;
         this.sex = sex;
-        CalculateAge();
+    }
+
+    /**
+     *
+     * @return Age of the person
+     */
+    public int getAge() {
+        return Period.between(dateOfBirth, LocalDate.now()).getYears();
     }
 
     public UUID getID() {
-        return ID;
+        return id;
     }
 
     public String getFullName() {
-        return FullName;
+        return fullName;
     }
 
     public LocalDate getDateOfBirth() {
-        return DateOfBirth;
+        return dateOfBirth;
     }
 
     public short getPassportSeriesAndNumber() {
-        return PassportSeriesAndNumber;
+        return passportSeriesAndNumber;
     }
 
     public Sex getSex() {
         return sex;
     }
 
-    public int getAge() {
-        return Age;
-    }
-
-    public void CalculateAge() {
-        this.Age = Period.between(DateOfBirth, LocalDate.now()).getYears();
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Person)) return false;
-        Person user = (Person) o;
-        return PassportSeriesAndNumber == user.PassportSeriesAndNumber &&
-                Age == user.Age && ID.equals(user.ID) && FullName.equals(user.FullName) &&
-                DateOfBirth.equals(user.DateOfBirth) && sex == user.sex;
+        Person person = (Person) o;
+        return getPassportSeriesAndNumber() == person.getPassportSeriesAndNumber() && Objects.equals(id, person.id) && Objects.equals(getFullName(), person.getFullName()) && Objects.equals(getDateOfBirth(), person.getDateOfBirth()) && getSex() == person.getSex();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ID, FullName, DateOfBirth, PassportSeriesAndNumber, sex, Age);
+        return Objects.hash(id, getFullName(), getDateOfBirth(), getPassportSeriesAndNumber(), getSex());
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "ID=" + ID +
-                ", FullName='" + FullName + '\'' +
-                ", DateOfBirth=" + DateOfBirth +
-                ", PassportSeriesAndNumber=" + PassportSeriesAndNumber +
+                "ID=" + id +
+                ", fullName='" + fullName + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", passportSeriesAndNumber=" + passportSeriesAndNumber +
                 ", sex=" + sex +
-                ", Age=" + Age +
+                ", Age=" + getAge() +
                 '}';
     }
 

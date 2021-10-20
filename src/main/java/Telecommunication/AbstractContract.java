@@ -5,47 +5,48 @@ import Person.Person;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
-
+/**
+ * @author DS
+ */
 public abstract class AbstractContract {
-    private final UUID ID;
-    private final LocalDate StartOfTheContract;
-    private final LocalDate TheEndOfTheContract;
-    private final int ContractNumber;
-    private final Person Owner;
+    private final UUID id;
+    private final LocalDate startOfTheContract;
+    private final LocalDate theEndOfTheContract;
+    private final int contractNumber;
+    private final Person owner;
 
     /**
-     *
      * @param startOfTheContract
      * @param theEndOfTheContract
      * @param contractNumber
      * @param owner
      */
     protected AbstractContract(LocalDate startOfTheContract, LocalDate theEndOfTheContract, int contractNumber, Person owner) {
-        ID = UUID.randomUUID();
-        StartOfTheContract = startOfTheContract;
-        TheEndOfTheContract = theEndOfTheContract;
-        ContractNumber = contractNumber;
-        Owner = owner;
+        id = UUID.randomUUID();
+        this.startOfTheContract = startOfTheContract;
+        this.theEndOfTheContract = theEndOfTheContract;
+        this.contractNumber = contractNumber;
+        this.owner = owner;
     }
 
     public UUID getID() {
-        return ID;
+        return id;
     }
 
     public LocalDate getStartOfTheContract() {
-        return StartOfTheContract;
+        return startOfTheContract;
     }
 
     public LocalDate getTheEndOfTheContract() {
-        return TheEndOfTheContract;
+        return theEndOfTheContract;
     }
 
     public int getContractNumber() {
-        return ContractNumber;
+        return contractNumber;
     }
 
     public Person getOwner() {
-        return Owner;
+        return owner;
     }
 
     @Override
@@ -64,11 +65,11 @@ public abstract class AbstractContract {
     @Override
     public String toString() {
         return "AbstractContract{" +
-                "ID=" + ID +
-                ", StartOfTheContract=" + StartOfTheContract +
-                ", TheEndOfTheContract=" + TheEndOfTheContract +
-                ", ContractNumber=" + ContractNumber +
-                ", Owner=" + Owner +
+                "id=" + id +
+                ", startOfTheContract=" + startOfTheContract +
+                ", theEndOfTheContract=" + theEndOfTheContract +
+                ", contractNumber=" + contractNumber +
+                ", owner=" + owner +
                 '}';
     }
 }

@@ -1,13 +1,13 @@
 package Telecommunication;
 
-import Container.ContainerArray;
 import Person.Person;
 
 import java.time.LocalDate;
 import java.util.Objects;
-import java.util.UUID;
-
-public abstract class DigitalTelevision extends AbstractContract {
+/**
+ * @author DS
+ */
+public class DigitalTelevision extends AbstractContract {
     private String[] digitalСhannels;
 
     public DigitalTelevision(LocalDate startOfTheContract, LocalDate theEndOfTheContract,
