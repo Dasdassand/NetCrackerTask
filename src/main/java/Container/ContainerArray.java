@@ -14,9 +14,11 @@ public class ContainerArray {
     private int pointer = 0;
 
     /**
-     * 2)
+     * If, when adding a new element, the array reaches
+     * its maximum size, then it is necessary to add an
+     * element with the possibility of recreating the array
      *
-     * @param item  The element to add
+     * @param item The element to add
      */
     public void add(AbstractContract item) {
         if (pointer == array.length - 1)
@@ -30,7 +32,12 @@ public class ContainerArray {
 
 
     /**
-     * @param index  The index of the item to remove
+     * If the occupied cells are 75% less than
+     * the free ones removing the element with
+     * a shift to the left and with the possibility
+     * of decreasing the array
+     *
+     * @param index The index of the item to remove
      */
     public void remove(int index) {
         if (pointer - index >= 0)
@@ -46,9 +53,9 @@ public class ContainerArray {
     }
 
     /**
-     * 4
+     * Method of creating a new array with a given length
      *
-     * @param newLength  new length
+     * @param newLength new length
      */
     private void resize(int newLength) {
         AbstractContract[] newArray = new AbstractContract[newLength];
@@ -61,10 +68,10 @@ public class ContainerArray {
     }
 
     /**
-     * 5
+     * Search for an element by ID using a regular search
      *
-     * @param id  ID
-     * @return  Contract
+     * @param id ID
+     * @return Contract
      */
     public AbstractContract getByID(UUID id) {
         for (int i = 0; i < pointer; i++) {
@@ -76,10 +83,10 @@ public class ContainerArray {
     }
 
     /**
-     * 6
+     * Deleting an element by ID using enumeration and the remove(int index) method
      *
-     * @param id  ID
-     * @return  Has the deletion occurred or not
+     * @param id ID
+     * @return Has the deletion occurred or not
      */
     public boolean removeByID(UUID id) {
         for (int i = 0; i < pointer; i++) {
@@ -118,8 +125,8 @@ public class ContainerArray {
     /**
      * Swaps elements
      *
-     * @param ind1  index one
-     * @param ind2  index two
+     * @param ind1 index one
+     * @param ind2 index two
      */
     private void swap(int ind1, int ind2) {
         AbstractContract tmp = array[ind1];
@@ -128,9 +135,9 @@ public class ContainerArray {
     }
 
     /**
-     * @param nameOne  Name one
-     * @param nameTwo  Name Two
-     * @return  The result of the character-by-character comparison
+     * @param nameOne Name one
+     * @param nameTwo Name Two
+     * @return The result of the character-by-character comparison
      */
     private boolean compareCharArray(String nameOne, String nameTwo) {
         char[] nameOneArray = removingSpaces(nameOne.toUpperCase().toCharArray());
@@ -151,8 +158,8 @@ public class ContainerArray {
     /**
      * Removing spaces from an array
      *
-     * @param array  array
-     * @return  Array without spaces
+     * @param array array
+     * @return Array without spaces
      */
     private char[] removingSpaces(char[] array) {
         String result = "";

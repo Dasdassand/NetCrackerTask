@@ -44,7 +44,7 @@ public class ContainerArrayTest {
     }
 
     /**
-     * 1
+     * Testing methods for determining the size of an array
      */
     @Test
     public void testSize() {
