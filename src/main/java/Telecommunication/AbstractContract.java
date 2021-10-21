@@ -16,10 +16,10 @@ public abstract class AbstractContract {
     private final Person owner;
 
     /**
-     * @param startOfTheContract
-     * @param theEndOfTheContract
-     * @param contractNumber
-     * @param owner
+     * @param startOfTheContract Start of the Contract
+     * @param theEndOfTheContract  The end of Contract
+     * @param contractNumber  Contract Number
+     * @param owner Owner
      */
     protected AbstractContract(LocalDate startOfTheContract, LocalDate theEndOfTheContract, int contractNumber, Person owner) {
         id = UUID.randomUUID();

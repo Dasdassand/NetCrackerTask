@@ -19,5 +19,13 @@ public class PersonTest {
     public void testGetAge() {
         Assert.assertEquals("TestAge failed", 20, person.getAge());
     }
+
+    /**
+     * Test method getID
+     */
+    @Test
+    public void testGetID() {
+        Assert.assertNotNull("TestGetID failed", person.getID());
+    }
 }
 

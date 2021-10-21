@@ -1,6 +1,8 @@
 import Container.ContainerArray;
 import Person.*;
+import Telecommunication.DigitalTelevision;
 import Telecommunication.MobileConnection;
+import Telecommunication.WiredInternet;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -108,5 +110,26 @@ public class ContainerArrayTest {
         Assert.assertEquals("TestSortByName failed", ("Berezucky Ivan Sergeevich" + "Savelev Denis Alexandrine"
                 + "Savelev Denis Alexeevitch" + "Savelev Denis Alexendrina" + "Savelev Denis Alexendrine"), resultSort);
 
+    }
+
+    /**
+     * Test for correct addition
+     */
+    @Test
+    public void TestAdd() {
+        containerArray.clear();
+        containerArray.add(new MobileConnection(LocalDate.of(2000, 10, 16),
+                LocalDate.of(2001, 10, 16), 123456780, new Person("SDV",
+                (short) 12345, Sex.Male, LocalDate.of(2001, 10, 17)),
+                1, 2, 3));
+        containerArray.add(new DigitalTelevision(LocalDate.of(2000, 10, 16),
+                LocalDate.of(2001, 10, 16), 123456780, new Person("SDV",
+                (short) 12345, Sex.Male, LocalDate.of(2001, 10, 17)), new String[]{"TV-1", "TV-2", "TV-3"}));
+        containerArray.add(new WiredInternet(LocalDate.of(2000, 10, 16),
+                LocalDate.of(2001, 10, 16), 123456780, new Person("SDV",
+                (short) 12345, Sex.Male, LocalDate.of(2001, 10, 17)),100));
+        Assert.assertTrue("", containerArray.getByIndex(0) instanceof MobileConnection);
+        Assert.assertTrue("", containerArray.getByIndex(1) instanceof DigitalTelevision);
+        Assert.assertTrue("", containerArray.getByIndex(2) instanceof WiredInternet);
     }
 }

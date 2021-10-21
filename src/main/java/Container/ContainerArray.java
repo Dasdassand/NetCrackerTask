@@ -8,8 +8,8 @@ import java.util.UUID;
  * @author DS
  */
 public class ContainerArray {
-    private final int INIT_SIZE = 16;
-    private final int CUT_RATE = 4;
+    private final static int INIT_SIZE = 16;
+    private final static int CUT_RATE = 4;
     private AbstractContract[] array = new AbstractContract[INIT_SIZE];
     private int pointer = 0;
 
