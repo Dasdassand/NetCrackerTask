@@ -2,7 +2,9 @@ package Container;
 
 import Telecommunication.AbstractContract;
 
+import java.util.Optional;
 import java.util.UUID;
+import java.util.function.Predicate;
 
 /**
  * @author DS
@@ -40,16 +42,36 @@ public class ContainerArray {
      * @param index The index of the item to remove
      */
     public void remove(int index) {
-        if (pointer - index >= 0)
-            System.arraycopy(array, index + 1, array, index, pointer - index);
-        array[pointer] = null;
-        pointer--;
-        if (array.length > INIT_SIZE && pointer < array.length / CUT_RATE)
-            resize(array.length / 2);
+        try {
+            if (pointer - index >= 0)
+                System.arraycopy(array, index + 1, array, index, pointer - index);
+            array[pointer] = null;
+            pointer--;
+            if (array.length > INIT_SIZE && pointer < array.length / CUT_RATE)
+                resize(array.length / 2);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
     }
 
-    public int size() {
-        return pointer;
+    /**
+     * Deleting an element by ID using enumeration and the remove(int index) method
+     *
+     * @param id ID
+     * @return Has the deletion occurred or not
+     */
+    public boolean removeByID(UUID id) {
+        try {
+            for (int i = 0; i < pointer; i++) {
+                if (array[i].getID() == id) {
+                    remove(i);
+                    return true;
+                }
+            }
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     /**
@@ -63,6 +85,11 @@ public class ContainerArray {
         array = newArray;
     }
 
+    public int size() {
+        return pointer;
+    }
+
+
     public AbstractContract getByIndex(int index) {
         return array[index];
     }
@@ -73,102 +100,15 @@ public class ContainerArray {
      * @param id ID
      * @return Contract
      */
-    public AbstractContract getByID(UUID id) {
+    public Optional<AbstractContract> getByID(UUID id) {
+        Optional<AbstractContract> optional = Optional.empty();
         for (int i = 0; i < pointer; i++) {
             if (array[i].getID() == id) {
-                return array[i];
+                optional = Optional.of(array[i]);
+                break;
             }
         }
-        return null;
-    }
-
-    /**
-     * Deleting an element by ID using enumeration and the remove(int index) method
-     *
-     * @param id ID
-     * @return Has the deletion occurred or not
-     */
-    public boolean removeByID(UUID id) {
-        for (int i = 0; i < pointer; i++) {
-            if (array[i].getID() == id) {
-                remove(i);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean getResultCompare(String nameOne, String nameTwo) {
-        return compareCharArray(nameOne, nameTwo);
-    }
-
-    public char[] getResultRemovingSpaces(String nameOne) {
-        return removingSpaces(nameOne.toCharArray());
-    }
-
-    /**
-     * Bubble Sort
-     */
-    public void sortByName() {
-        boolean needIteration = true;
-        while (needIteration) {
-            needIteration = false;
-            for (int i = 1; i < pointer; i++) {
-                if (compareCharArray(array[i].getOwner().getFullName(), array[i - 1].getOwner().getFullName())) {
-                    swap(i, i - 1);
-                    needIteration = true;
-                }
-            }
-        }
-    }
-
-    /**
-     * Swaps elements
-     *
-     * @param ind1 index one
-     * @param ind2 index two
-     */
-    private void swap(int ind1, int ind2) {
-        AbstractContract tmp = array[ind1];
-        array[ind1] = array[ind2];
-        array[ind2] = tmp;
-    }
-
-    /**
-     * @param nameOne Name one
-     * @param nameTwo Name Two
-     * @return The result of the character-by-character comparison
-     */
-    private boolean compareCharArray(String nameOne, String nameTwo) {
-        char[] nameOneArray = removingSpaces(nameOne.toUpperCase().toCharArray());
-        char[] nameTwoArray = removingSpaces(nameTwo.toUpperCase().toCharArray());
-        int length = Math.min(nameOneArray.length, nameTwoArray.length);
-        for (int i = 0; i < length; i++) {
-            if (nameOneArray[i] > nameTwoArray[i]) {
-                return false;
-            } else {
-                if (nameOneArray[i] < nameTwoArray[i]) {
-                    return true;
-                }
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Removing spaces from an array
-     *
-     * @param array array
-     * @return Array without spaces
-     */
-    private char[] removingSpaces(char[] array) {
-        String result = "";
-        for (char c : array) {
-            if (c != ' ') {
-                result += c;
-            }
-        }
-        return result.toCharArray();
+        return optional;
     }
 
     /**
@@ -177,6 +117,22 @@ public class ContainerArray {
     public void clear() {
         array = new AbstractContract[INIT_SIZE];
         pointer = 0;
+    }
+
+    public AbstractContract[] getArray() {
+        return array;
+    }
+
+    public Optional<AbstractContract> searchContract(Predicate<AbstractContract> predicate) {
+        Optional<AbstractContract> optional = Optional.empty();
+        for (AbstractContract abstractContract : array) {
+            if (predicate.test(abstractContract)) {
+                optional = Optional.of(abstractContract);
+                break;
+            }
+
+        }
+        return optional;
     }
 }
 

@@ -62,55 +62,6 @@ public class ContainerArrayTest {
         Assert.assertEquals("TestSizeRemove failed", 9, containerArray.size());
     }
 
-    /**
-     * Comparison method test
-     */
-    @Test
-    public void TestCompareCharArray() {
-        Assert.assertArrayEquals("TestRemoveSpaces failed", "SavelevDenisAlexeevich".toCharArray(),
-                containerArray.getResultRemovingSpaces("Savelev Denis Alexeevich"));
-        Assert.assertTrue("TestCompareCharArray failed",
-                containerArray.getResultCompare("Aaaa Aaaa Aaaa", "Bbbb Bbbb Bbbb"));
-        Assert.assertTrue("TestCompareCharArray failed",
-                containerArray.getResultCompare("Aaaa Aaaa Aaaaa", "Bbbb Bbbb Bbbb"));
-        Assert.assertTrue("TestCompareCharArray failed",
-                containerArray.getResultCompare("Aaaa Aaaa Aaaa", "Bbbb Bbbb Bbbbb"));
-    }
-
-    /**
-     * Test of the sorting method
-     */
-    @Test
-    public void TestSortByName() {
-        containerArray.clear();
-        containerArray.add(new MobileConnection(LocalDate.of(2000, 10, 16),
-                LocalDate.of(2001, 10, 16), 123456780, new Person("Savelev Denis Alexeevitch",
-                (short) 12345, Sex.Male, LocalDate.of(2001, 10, 17)),
-                1, 2, 3));
-        containerArray.add(new MobileConnection(LocalDate.of(2000, 10, 16),
-                LocalDate.of(2001, 10, 16), 123456780, new Person("Berezucky Ivan Sergeevich",
-                (short) 12345, Sex.Male, LocalDate.of(2001, 10, 17)),
-                1, 2, 3));
-        containerArray.add(new MobileConnection(LocalDate.of(2000, 10, 16),
-                LocalDate.of(2001, 10, 16), 123456780, new Person("Savelev Denis Alexandrine",
-                (short) 12345, Sex.Male, LocalDate.of(2001, 10, 17)),
-                1, 2, 3));
-        containerArray.add(new MobileConnection(LocalDate.of(2000, 10, 16),
-                LocalDate.of(2001, 10, 16), 123456780, new Person("Savelev Denis Alexendrine",
-                (short) 12345, Sex.Male, LocalDate.of(2001, 10, 17)),
-                1, 2, 3));
-        containerArray.add(new MobileConnection(LocalDate.of(2000, 10, 16),
-                LocalDate.of(2001, 10, 16), 123456780, new Person("Savelev Denis Alexendrina",
-                (short) 12345, Sex.Male, LocalDate.of(2001, 10, 17)),
-                1, 2, 3));
-        containerArray.sortByName();
-        String resultSort = containerArray.getByIndex(0).getOwner().getFullName() + containerArray.getByIndex(1).getOwner().getFullName()
-                + containerArray.getByIndex(2).getOwner().getFullName() + containerArray.getByIndex(3).getOwner().getFullName()
-                + containerArray.getByIndex(4).getOwner().getFullName();
-        Assert.assertEquals("TestSortByName failed", ("Berezucky Ivan Sergeevich" + "Savelev Denis Alexandrine"
-                + "Savelev Denis Alexeevitch" + "Savelev Denis Alexendrina" + "Savelev Denis Alexendrine"), resultSort);
-
-    }
 
     /**
      * Test for correct addition
@@ -127,7 +78,7 @@ public class ContainerArrayTest {
                 (short) 12345, Sex.Male, LocalDate.of(2001, 10, 17)), new String[]{"TV-1", "TV-2", "TV-3"}));
         containerArray.add(new WiredInternet(LocalDate.of(2000, 10, 16),
                 LocalDate.of(2001, 10, 16), 123456780, new Person("SDV",
-                (short) 12345, Sex.Male, LocalDate.of(2001, 10, 17)),100));
+                (short) 12345, Sex.Male, LocalDate.of(2001, 10, 17)), 100));
         Assert.assertTrue("", containerArray.getByIndex(0) instanceof MobileConnection);
         Assert.assertTrue("", containerArray.getByIndex(1) instanceof DigitalTelevision);
         Assert.assertTrue("", containerArray.getByIndex(2) instanceof WiredInternet);
