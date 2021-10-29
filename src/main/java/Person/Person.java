@@ -3,6 +3,8 @@ package Person;
 
 import Container.ContainerArray;
 import Sorting.BubbleSort;
+import Sorting.InsertionSort;
+import Sorting.MergeSort;
 import Telecommunication.AbstractContract;
 import Telecommunication.MobileConnection;
 
@@ -99,12 +101,21 @@ public class Person {
                 (short) 12345, Sex.Male, LocalDate.of(2001, 10, 17)),
                 1, 2, 3));
         containerArray.add(new MobileConnection(LocalDate.of(2000, 10, 16),
+                LocalDate.of(2001, 10, 16), 123456780, new Person("SDV",
+                (short) 12445, Sex.Male, LocalDate.of(2001, 10, 17)),
+                1, 2, 3));
+        containerArray.add(new MobileConnection(LocalDate.of(2000, 10, 16),
                 LocalDate.of(2001, 10, 16), 123456780, new Person("VDV",
                 (short) 567897, Sex.Male, LocalDate.of(2001, 10, 17)),
                 1, 2, 3));
+        MergeSort mergeSort = new MergeSort();
+        InsertionSort insertionSort = new InsertionSort();
         BubbleSort bubbleSort = new BubbleSort();
         Comparator<AbstractContract> comparator = Comparator.comparing(contract -> contract.getOwner().getFullName());
-        bubbleSort.sort(comparator,containerArray);
+        mergeSort.sort(comparator,containerArray);
+        for (int i = 0; i < containerArray.size(); i++){
+            System.out.println(containerArray.getIndex(i).toString());
+        }
         Predicate<AbstractContract> pr1 = abstractContract -> abstractContract.getOwner().getPassportSeriesAndNumber() == (short) 567897;
         Predicate<AbstractContract> pr2 = abstractContract -> abstractContract.getOwner().getFullName().equals("VDV");
         System.out.println(containerArray.searchContract(pr1.and(pr2)).toString());

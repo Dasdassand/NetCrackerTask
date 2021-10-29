@@ -38,11 +38,10 @@ public class ContainerArrayTest {
     public void testRemove() {
         UUID tmpID = containerArray.getByIndex(containerArray.size() - 1).getID();
         containerArray.remove(containerArray.size() - 1);
-        Assert.assertNull("TestRemove failed", containerArray.getByID(tmpID));
+        Assert.assertFalse("TestRemove failed", containerArray.getByID(tmpID).isPresent());
         tmpID = containerArray.getIndex(containerArray.size() - 1).getID();
         containerArray.removeByID(tmpID);
-        Assert.assertNull("TestRemoveByID failed", containerArray.getByID(tmpID));
-
+        Assert.assertFalse("TestRemoveByID failed", containerArray.getByID(tmpID).isPresent());
     }
 
     /**
